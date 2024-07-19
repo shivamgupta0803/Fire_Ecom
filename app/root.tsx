@@ -6,6 +6,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import "./tailwind.css";
+import Navbar from "./components/Navbar";
+import ShoppingCartModel from "./components/ShoppingCartModel";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,7 +19,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {children}
+        </main>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -26,5 +30,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+      <ShoppingCartModel />
+    </>
+  );
 }
