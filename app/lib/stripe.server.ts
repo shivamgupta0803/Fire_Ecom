@@ -1,9 +1,5 @@
 import Stripe from "stripe";
-
-interface ProductId {
-  slugProductId: string;
-  quantity: number;
-}
+import { ProductId } from "./interface";
 
 export function getDomainUrl(request: Request) {
   const host = request.headers.get("X-Forward-Host") ?? request.headers.get("host");
@@ -16,19 +12,25 @@ export function getDomainUrl(request: Request) {
   return `${protocol}://${host}`;
 }
 
-const secret_key = process.env.STRIPE_SECRET_KEY as string;
-
 export const getStripeSession = async (
-  items: ProductId[],
+  items: string,
   domainUrl: string
 ): Promise<string> => {
-  const stripe = new Stripe(secret_key, {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
     apiVersion: "2024-06-20",
     typescript: true,
   });
 
-  const line_items = items.map((product) => ({
-    price: product.slugProductId,
+  const dataObj = JSON.parse(items);
+
+  const line_items = dataObj.map((product: ProductId) => ({
+    price_data: {
+      currency: "usd",
+      product_data: {
+        name: `Product Name`,
+      },
+      unit_amount: product.price * 100,
+    },
     quantity: product.quantity,
     adjustable_quantity: {
       enabled: true,
@@ -37,10 +39,12 @@ export const getStripeSession = async (
     },
   }));
 
+  console.log('Line items:', line_items);
+
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     payment_method_types: ["card"],
-    line_items,
+    line_items: line_items,
     success_url: `${domainUrl}/payment/success`,
     cancel_url: `${domainUrl}/payment/cancelled`,
   });

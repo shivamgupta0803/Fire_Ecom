@@ -14,10 +14,9 @@ npm run dev
 
 First, build your app for production:
 
-```sh
-npm run build
-```
+Deployement Link : https://firecracker.vercel.app
 
+sanity add product link : https://sanity-product-studio.sanity.studio
 Then run the app in production mode:
 
 ```sh

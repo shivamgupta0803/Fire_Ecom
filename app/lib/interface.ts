@@ -6,6 +6,7 @@ export interface Product {
   };
   description: string;
   imageUrl: string;
+  
 }
 
 export interface ProductId {
