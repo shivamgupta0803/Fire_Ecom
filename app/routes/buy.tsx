@@ -1,5 +1,6 @@
 import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
 import { getDomainUrl, getStripeSession } from "~/lib/stripe.server";
+import { sendEmailService } from "~/utils/mailer";
 
 export async function action({ request }: ActionFunctionArgs) {
   if (request.method !== "POST") {
@@ -15,6 +16,21 @@ export async function action({ request }: ActionFunctionArgs) {
     items,
     getDomainUrl(request)
   );
+
+  const itemsArray = JSON.parse(items);
+
+  const itemListText = `
+  Item Name             | Price
+  ----------------------|------
+  ${itemsArray.map((item: any) => 
+    `${item.name.padEnd(22)} | ${item.price}`
+  ).join('\n')}
+  `;
+
+  console.log("this is the data of itemNames::", itemListText);
+    
+  await sendEmailService('shivam.gupta@algorisys.com', 'Technical Devices List', itemListText);
+
 
   return redirect(stripeRedirectUrl);
 }

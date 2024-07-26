@@ -39,7 +39,7 @@ export const getStripeSession = async (
     },
   }));
 
-  console.log('Line items:', line_items);
+  // console.log('Line items:', line_items);
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",

@@ -24,7 +24,10 @@ const IndexPage = () => {
   const { products } = useLoaderData<typeof loader>() as iAppProps;
   return (
     <>
-      <section className="flex flex-col justify-between gap-6 sm:gap-10 md:gap-16 lg:flex-row mt-12">
+      <section
+        className="flex flex-col justify-between gap-6 sm:gap-10 md:gap-16 lg:flex-row mt-8"
+        id="top"
+      >
         <div className="flex flex-col justify-center sm:text-center lg-py-12 lg:text-left xl:w-5/12 xl:py-24">
           <p className="mb-4 font-semibold text-indigo-600 md:mb-6 md:text-lg xl:text-xl">
             Welcome to my shop!
@@ -42,7 +45,7 @@ const IndexPage = () => {
               to={"#products"}
               className="rounded-lg bg-indigo-600 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 md:text-base"
             >
-              Shop Now
+              Shop Card
             </Link>
           </div>
         </div>
@@ -57,9 +60,12 @@ const IndexPage = () => {
 
       <section id="products" className="py-24 sm:py-32 lg:pt-32">
         <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 sm:gap-x-6 md:grid-cols-3 md:gap-y-12 lg:grid-cols-4 lg:gap-x-8">
-          {products.map((product) => (
+          {products.map((product) =>
             product.slug?.current ? (
-              <Link key={product.slug.current} to={`/product/${product.slug.current}`}>
+              <Link
+                key={product.slug.current}
+                to={`/product/${product.slug.current}`}
+              >
                 <div className="flex flex-col items-center">
                   <div className="w-full h-56 rounded-md overflow-hidden group-hover:opacity-75 lg:h-72 xl:h-80">
                     <img
@@ -68,14 +74,23 @@ const IndexPage = () => {
                       className="w-full h-full object-center object-cover"
                     />
                   </div>
-                  <h3 className="mt-4 text-2xl text-gray-700">{product.name}</h3>
-                  <p className="mt-1 text-2xl font-medium text-gray-900">${product.price}</p>
+                  <h3 className="mt-4 text-2xl text-gray-700">
+                    {product.name}
+                  </h3>
+                  <p className="mt-1 text-2xl font-medium text-gray-900">
+                    ${product.price}
+                  </p>
                 </div>
               </Link>
             ) : null
-          ))}
+          )}
         </div>
       </section>
+      <footer className="mb-4">
+        <h1 className="text-center text-blue-800">
+          Coptright by Shivam Gupta &copy; <i className="bi bi-arrow-up"></i>
+        </h1>
+      </footer>
     </>
   );
 };

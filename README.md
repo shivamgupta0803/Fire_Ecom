@@ -14,14 +14,17 @@ npm run dev
 
 First, build your app for production:
 
-Deployement Link : https://firecracker.vercel.app
+on local:: http://localhost:5173/
 
-sanity add product link : https://sanity-product-studio.sanity.studio
 Then run the app in production mode:
 
-```sh
-npm start
-```
+Deployement Link : https://fire-ecom.vercel.app
+
+sanity add product link for add product on site perspective: https://sanity-product-studio.sanity.studio
+
+stripe add product for payment perspective : https://dashboard.stripe.com/test/products/
+
+stripe watch payments : https://dashboard.stripe.com/test/payments
 
 Now you'll need to pick a host to deploy it to.
 
@@ -37,4 +40,5 @@ Make sure to deploy the output of `npm run build`
 ## Styling
 
 This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+
 # Fire_Ecom
