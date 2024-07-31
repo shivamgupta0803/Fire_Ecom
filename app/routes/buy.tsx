@@ -20,12 +20,27 @@ export async function action({ request }: ActionFunctionArgs) {
   const itemsArray = JSON.parse(items);
 
   const itemListText = `
-  Item Name             | Price
-  ----------------------|------
-  ${itemsArray.map((item: any) => 
-    `${item.name.padEnd(22)} | ${item.price}`
-  ).join('\n')}
-  `;
+  <h1> Fire Product List </h1>
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${itemsArray
+        .map(
+          (item: any) => `
+            <tr>
+              <td>${item.name}</td>
+              <td>₹${item.price}</td>
+            </tr>`
+        )
+        .join('')}
+    </tbody>
+  </table>
+`;
 
   console.log("this is the data of itemNames::", itemListText);
     

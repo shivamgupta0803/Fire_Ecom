@@ -1,28 +1,21 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+  host: "smtp.gmail.com",
   port: 587,
   secure: false,
   auth: {
-    user: 'shivamgupta08032001@gmail.com', 
-    pass: 'keimqvfubhhiowou', 
+    user: "bloggieapp@gmail.com",
+    pass: "fthqtorropvylczy",
   },
 });
 
 export const sendEmailService = async (to: any, subject: any, text: any) => {
   const mailOptions = {
-    from: 'shivamgupta08032001@gmail.com',
+    from: "shivamgupta08032001@gmail.com",
     to,
     subject,
-    text,
+    html: text,
   };
-
-  // try {
-    await transporter.sendMail(mailOptions);
-  //   console.log('Email sent successfully');
-  // } catch (error) {
-  //   console.error('Error sending email:', error);
-  // }
+  await transporter.sendMail(mailOptions);
 };
-

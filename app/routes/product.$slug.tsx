@@ -30,8 +30,7 @@ function classNames(...classes: string[]) {
 
 const productSlug = () => {
   const { data } = useLoaderData<iAppProps>();
-  const addToCart = useCartState((state)=>state.addToCart)
-
+  const addToCart = useCartState((state) => state.addToCart);
 
   if (!data || data.length === 0) {
     return <div>No product found</div>;
@@ -49,7 +48,7 @@ const productSlug = () => {
               <Tab.List className="grid grid-cols-4 gap-6">
                 {product.images.map((image: string, index: number) => (
                   <Tab
-                    key={index}
+                    key={product.slug}
                     className="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     {({ selected }) => (
