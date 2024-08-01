@@ -2,6 +2,11 @@ import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
 import { getDomainUrl, getStripeSession } from "~/lib/stripe.server";
 import { sendEmailService } from "~/utils/mailer";
 
+export const loader = async () => {
+  // Fetch data or perform any required actions
+  return json({ message: "Hello from the loader!" });
+};
+
 export async function action({ request }: ActionFunctionArgs) {
   if (request.method !== "POST") {
     return json({ message: "Method is not allowed" }, 405);
@@ -12,10 +17,10 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const items = values.cartData as string;
 
-  const stripeRedirectUrl = await getStripeSession(
-    items,
-    getDomainUrl(request)
-  );
+  // const stripeRedirectUrl = await getStripeSession(
+  //   items,
+  //   getDomainUrl(request)
+  // );
 
   const itemsArray = JSON.parse(items);
 
@@ -37,15 +42,20 @@ export async function action({ request }: ActionFunctionArgs) {
               <td>₹${item.price}</td>
             </tr>`
         )
-        .join('')}
+        // <p>${totalPrice}</p>
+        .join("")}
     </tbody>
   </table>
 `;
 
-  console.log("this is the data of itemNames::", itemListText);
-    
-  await sendEmailService('shivam.gupta@algorisys.com', 'Technical Devices List', itemListText);
+  // console.log("this is the data of itemNames::", itemListText);
+
+  await sendEmailService(
+    "shivam.gupta@algorisys.com",
+    "Technical Devices List",
+    itemListText
+  );
 
 
-  return redirect(stripeRedirectUrl);
+  return redirect("/payment/success") && json({ success: true });
 }
