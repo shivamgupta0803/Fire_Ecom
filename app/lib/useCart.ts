@@ -1,6 +1,9 @@
 import { create } from "zustand";
 
 interface Product {
+  image: any;
+  description: string;
+  imageUrl: string; // Make sure this is a string, not an array
   id: string;
   name: string;
   price: number;
@@ -55,6 +58,7 @@ export const useCartState = create<State & Actions>((set, get) => ({
         totalPrice: state.totalPrice + product.price,
       }));
     }
+    console.log("Cart after adding item:", get().cart);
   },
   removeFromCart: (productId: string, price: number) => {
     set((state) => {
@@ -87,5 +91,6 @@ export const useCartState = create<State & Actions>((set, get) => ({
         };
       }
     });
+    console.log("Cart after removing item:", get().cart);
   },
 }));

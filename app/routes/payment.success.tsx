@@ -126,12 +126,9 @@ import { Link } from "@remix-run/react";
 import { useEffect, useState } from "react";
 
 const PaymentSuccess = () => {
-  useEffect(
-    () => {
-      alert("Thank you for ordering on Fire Cracker! Visit again.");
-    },
-    [redirect("/payment/success")]
-  );
+  useEffect(() => {
+    alert("Thank you for ordering on Fire Cracker! Visit again.");
+  }, [redirect("/payment/success")]);
   return (
     <>
       <div className="h-[90vh] flex flex-col items-center justify-center overflow-hidden w-full">
@@ -167,13 +164,11 @@ export async function action({ request }: ActionFunctionArgs) {
   const values = Object.fromEntries(formData);
 
   const items = values.cartData as string;
-  const latitude = values.latitudeData as string;
-  const longitude = values.longitudeData as string;
   const userAddressData = values.userAddressData as string;
 
   console.log("this is the value of userAddressData::", userAddressData);
-  // console.log("this is the value of itemsArray ::", longitude);
   const itemsArray = JSON.parse(items);
+  console.log(itemsArray);
 
   const itemListText = `
   <h1 style="font-family: Arial, sans-serif; color: #333;">🔥 Fire Product List</h1>
@@ -182,6 +177,8 @@ export async function action({ request }: ActionFunctionArgs) {
       <tr>
         <th style="background-color: #f2f2f2; padding: 10px; text-align: left;">Item Name</th>
         <th style="background-color: #f2f2f2; padding: 10px; text-align: left;">Price</th>
+        <th style="background-color: #f2f2f2; padding: 10px; text-align: left;">Quantity</th>
+        <th style="background-color: #f2f2f2; padding: 10px; text-align: left;">Image</th>
       </tr>
     </thead>
     <tbody>
@@ -191,6 +188,8 @@ export async function action({ request }: ActionFunctionArgs) {
             <tr>
               <td style="padding: 10px; border: 1px solid #ddd;">${item.name}</td>
               <td style="padding: 10px; border: 1px solid #ddd;">₹${item.price}</td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${item.quantity}</td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${item.images[0]}</td>
             </tr>`
         )
         .join("")}
@@ -202,7 +201,7 @@ export async function action({ request }: ActionFunctionArgs) {
   </p>
 `;
   await sendEmailService(
-    "shivam.gupta@algorisys.com",
+    "bloggieapp@gmail.com",
     "Technical Devices List",
     itemListText
   );
