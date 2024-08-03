@@ -10,12 +10,16 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendEmailService = async (to: any, subject: any, text: any) => {
+export const sendEmailService = async (to: string[], subject: string, text: string) => {
   const mailOptions = {
     from: "shivamgupta08032001@gmail.com",
-    to,
     subject,
     html: text,
   };
-  await transporter.sendMail(mailOptions);
+
+  const sendToRecipient = async (email: string) => {
+    await transporter.sendMail({ ...mailOptions, to: email });
+  };
+
+  await Promise.all(to.map(sendToRecipient));
 };

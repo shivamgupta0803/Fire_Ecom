@@ -45,29 +45,29 @@ const IndexPage = () => {
         id="top"
       >
         <div className="flex flex-col justify-center sm:text-center lg-py-12 lg:text-left xl:w-5/12 xl:py-24">
-          <p className="font-semibold text-indigo-600 md:mb-2 md:text-lg xl:text-xl">
-            Welcome to my shop!
+          <p className="font-semibold text-yellow-500 md:mb-2 md:text-lg xl:text-xl">
+            Step into the Sparkle!
           </p>
           <h1 className="text-black mb-2 text-4xl font-bold sm:text-5xl md:mb-12 md:text-6xl ">
-            Focus on tech that matters
+            Ignite Your Tech Passion
           </h1>
           <p className="mb-8 leading-relaxed text-gray-500 md:mb-12 lg:w-4/5 xl:text-lg">
-            Welcome to TechConnect, your ultimate destination for all things
-            tech! Step into a world of innovation and discovery as we bring you
-            the latest and greatest gadgets, electronics, and accessories.
+            Welcome to TechConnect, where innovation meets excitement! Discover
+            the latest gadgets and accessories that will light up your world
+            with a burst of technology and creativity.
           </p>
           <div className="">
             <Link
               to={"#products"}
-              className="rounded-lg bg-indigo-600 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 md:text-base"
+              className="rounded-lg bg-yellow-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-yellow-300 transition duration-100 md:text-base"
             >
-              Shop Now
+              Explore Now
             </Link>
           </div>
         </div>
         <div className="h-48 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:h-auto xl:w-5/12">
           <img
-            src="https://images.pexels.com/photos/306763/pexels-photo-306763.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            src="https://media.istockphoto.com/id/1339303464/vector/happy-diwali-hindu-festival-banner-greeting-card-burning-diya-illustration-background-for.jpg?s=612x612&w=0&k=20&c=2e1R4zw3Ze-vt1e6jl9oWWe9fcElWmi1M9M382wwdu4="
             alt="Product Image"
             className="h-full w-full object-cover object-center"
           />
@@ -94,7 +94,7 @@ const IndexPage = () => {
                     {product.name}
                   </h3>
                   <p className="mt-1 text-2xl font-medium text-gray-900">
-                    ${product.price}
+                    ₹ {product.price}
                   </p>
                 </div>
               </Link>
@@ -104,10 +104,10 @@ const IndexPage = () => {
       </section>
 
       <footer className="mb-4">
-        <h1 className="text-center text-blue-800">
-          Copyright by Shivam Gupta &copy;{" "}
+        <h1 className="text-center text-yellow-500">
+          Celebrating Innovation with Shivam Gupta &copy;{" "}
           <Link to={"#top"}>
-              <i className="bi bi-arrow-up text-3xl"></i>
+            <i className="bi bi-arrow-up text-3xl"></i>
           </Link>
         </h1>
       </footer>

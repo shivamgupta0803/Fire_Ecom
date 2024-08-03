@@ -1,163 +1,38 @@
-// import { ActionFunctionArgs } from "@remix-run/node";
-// import { json, Link, redirect } from "@remix-run/react";
-// import { useEffect, useState } from "react";
-// import { sendEmailService } from "~/utils/mailer";
-
-// const PaymentSuccess = () => {
-//   const [latitude, setLatitude] = useState(0);
-//   const [longitude, setLongitude] = useState(0);
-
-//   useEffect(() => {
-//     alert("thank you for order on fire cracker! visit again");
-//     if (navigator.geolocation) {
-//       navigator.geolocation.getCurrentPosition(
-//         (position) => {
-//           const { latitude, longitude } = position.coords;
-//           setLatitude(latitude);
-//           setLongitude(longitude);
-//         },
-//         (error) => {
-//           console.log("Geolocation error:", error);
-//         }
-//       );
-//     } else {
-//       console.log("Geolocation is not supported by this browser.");
-//     }
-//   }, []);
-//   return (
-//     <>
-//       <div className="h-[90vh] flex flex-col items-center justify-center overflow-hidden w-full">
-//         <div className="bg-white p-6 mg:mx-auto">
-//           <div className="test-center">
-//             <h3 className="md:text-2xl text-base text-gray-900 font-semibold text-center">
-//               Your order was successful
-//             </h3>
-//             <p className="text-gray-600 my-2">
-//               Thank you for your order, payment was successful
-//             </p>
-//             <p className="text-center">Have a good day!</p>
-//             <div className="py-10 text-center">
-//               <Link
-//                 to={"/"}
-//                 className="px-12 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white font-semibold py-3"
-//               >
-//                 Go to homepage
-//               </Link>
-//             </div>
-//           </div>
-//           {latitude && longitude && (
-//             <div className="result w-full max-w-md bg-white p-6 mt-4 rounded-lg shadow-md">
-//               <h2 className="text-2xl font-semibold mb-4 text-indigo-600">
-//                 Your Coordinates
-//               </h2>
-//               <div className="mb-4">
-//                 <strong className="block text-gray-700">Latitude:</strong>
-//                 <span className="text-gray-900">{latitude}</span>
-//               </div>
-//               <div className="mb-4">
-//                 <strong className="block text-gray-700">Longitude:</strong>
-//                 <span className="text-gray-900">{longitude}</span>
-//               </div>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export async function action({ request }: ActionFunctionArgs) {
-//   const formData = await request.formData();
-//   const values = Object.fromEntries(formData);
-
-//   const items = values.cartData as string;
-//   const itemsArray = JSON.parse(items);
-
-//   const itemListText = `
-//   <h1> Fire Product List </h1>
-//   <table border="1" cellpadding="5" cellspacing="0">
-//     <thead>
-//       <tr>
-//         <th>Item Name</th>
-//         <th>Price</th>
-//       </tr>
-//     </thead>
-//     <tbody>
-//       ${itemsArray
-//         .map(
-//           (item: any) => `
-//             <tr>
-//               <td>${item.name}</td>
-//               <td>₹${item.price}</td>
-//             </tr>
-//                <tr>
-//               <td>${latitude}</td>
-//               <td>₹${longitude}</td>
-//             </tr>
-//             `
-//         )
-//         .join("")}
-//     </tbody>
-//   </table>
-//         <div className="result w-full max-w-md bg-white p-6 mt-4 rounded-lg shadow-md">
-//           <h2 className="text-2xl font-semibold mb-4 text-indigo-600">
-//             Your Coordinates
-//           </h2>
-//           <div className="mb-4">
-//           </div>
-//           <div className="mb-4">{longitude}
-//           </div>
-//         </div>
-//       )}
-// `;
-
-//   await sendEmailService(
-//     "shivam.gupta@algorisys.com",
-//     "Technical Devices List",
-//     itemListText
-//   );
-
-//   return redirect("/payment/success");
-// }
-
-// export default PaymentSuccess;
-
 import { Link } from "@remix-run/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { ActionFunctionArgs, redirect } from "@remix-run/node";
+import { sendEmailService } from "~/utils/mailer";
 
 const PaymentSuccess = () => {
   useEffect(() => {
     alert("Thank you for ordering on Fire Cracker! Visit again.");
-  }, [redirect("/payment/success")]);
+  }, []);
+
   return (
-    <>
-      <div className="h-[90vh] flex flex-col items-center justify-center overflow-hidden w-full">
-        <div className="bg-white p-6 mg:mx-auto">
-          <div className="text-center">
-            <h3 className="md:text-2xl text-base text-gray-900 font-semibold">
-              Your order was successful
-            </h3>
-            <p className="text-gray-600 my-2">
-              Thank you for your order, payment was successful.
-            </p>
-            <p className="text-center">Have a good day!</p>
-            <div className="py-10 text-center">
-              <Link
-                to="/"
-                className="px-12 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white font-semibold py-3"
-              >
-                Go to homepage
-              </Link>
-            </div>
+    <div className="h-[90vh] flex flex-col items-center justify-center overflow-hidden w-full">
+      <div className="bg-white p-6 mg:mx-auto">
+        <div className="text-center">
+          <h3 className="md:text-2xl text-base text-gray-900 font-semibold">
+            Your order was successful
+          </h3>
+          <p className="text-gray-600 my-2">
+            Thank you for your order, payment was successful.
+          </p>
+          <p className="text-center">Have a good day!</p>
+          <div className="py-10 text-center">
+            <Link
+              to="/"
+              className="px-12 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white font-semibold py-3"
+            >
+              Go to homepage
+            </Link>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-import { ActionFunctionArgs, redirect } from "@remix-run/node";
-import { sendEmailService } from "~/utils/mailer";
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -165,10 +40,9 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const items = values.cartData as string;
   const userAddressData = values.userAddressData as string;
+  const totalPrice = parseFloat(values.totalPrice as string);
 
-  console.log("this is the value of userAddressData::", userAddressData);
   const itemsArray = JSON.parse(items);
-  console.log(itemsArray);
 
   const itemListText = `
   <h1 style="font-family: Arial, sans-serif; color: #333;">🔥 Fire Product List</h1>
@@ -179,6 +53,7 @@ export async function action({ request }: ActionFunctionArgs) {
         <th style="background-color: #f2f2f2; padding: 10px; text-align: left;">Price</th>
         <th style="background-color: #f2f2f2; padding: 10px; text-align: left;">Quantity</th>
         <th style="background-color: #f2f2f2; padding: 10px; text-align: left;">Image</th>
+        <th style="background-color: #f2f2f2; padding: 10px; text-align: left;">Amount</th>
       </tr>
     </thead>
     <tbody>
@@ -186,27 +61,54 @@ export async function action({ request }: ActionFunctionArgs) {
         .map(
           (item: any) => `
             <tr>
-              <td style="padding: 10px; border: 1px solid #ddd;">${item.name}</td>
-              <td style="padding: 10px; border: 1px solid #ddd;">₹${item.price}</td>
-              <td style="padding: 10px; border: 1px solid #ddd;">${item.quantity}</td>
-              <td style="padding: 10px; border: 1px solid #ddd;">${item.images[0]}</td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${
+                item.name
+              }</td>
+              <td style="padding: 10px; border: 1px solid #ddd;">₹${
+                item.price
+              }</td>
+              <td style="padding: 10px; border: 1px solid #ddd;">${
+                item.quantity
+              }</td>
+              <td style="padding: 10px; border: 1px solid #ddd;"><img src="${
+                item.images[0]
+              }" alt="${item.name}" style="max-width: 100px;" /></td>
+              <td style="padding: 10px; border: 1px solid #ddd;">₹${(
+                item.price * item.quantity
+              ).toFixed(2)}</td>
             </tr>`
         )
         .join("")}
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4" style="padding: 10px; text-align: right; font-weight: bold;">Total Amount:</td>
+        <td style="padding: 10px; border: 1px solid #ddd;">₹${totalPrice.toFixed(2)}</td>
+      </tr>
+    </tfoot>
   </table>
+
   <h2 style="font-family: Arial, sans-serif; color: #333; margin-top: 20px;">📍 User Address</h2>
   <p style="font-family: Arial, sans-serif; color: #666; line-height: 1.5;">
     ${userAddressData},<br>
   </p>
 `;
-  await sendEmailService(
-    "bloggieapp@gmail.com",
-    "Technical Devices List",
-    itemListText
-  );
+
+  // Define the recipients array
+  const recipients = ["bloggieapp@gmail.com", "sundaram6060@gmail.com",];
+
+  // Adding a delay before sending the email
+  setTimeout(async () => {
+    await sendEmailService(
+      recipients,
+      "Diwali Fire Product List",
+      itemListText
+    );
+  }, 2000); // Delay time in milliseconds (e.g., 2000ms = 2 seconds)
 
   return redirect("/payment/success");
 }
+
+
 
 export default PaymentSuccess;

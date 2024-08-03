@@ -199,15 +199,10 @@ const ShoppingCartModal = () => {
                           name="cartData"
                           value={JSON.stringify(cart)}
                         />
-                        <input
+                         <input
                           type="hidden"
-                          name="latitudeData"
-                          value={latitude}
-                        />
-                        <input
-                          type="hidden"
-                          name="longitudeData"
-                          value={longitude}
+                          name="totalPrice"
+                          value={totalPrice}
                         />
                         <input
                           type="hidden"

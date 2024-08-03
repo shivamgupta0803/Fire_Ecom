@@ -4,6 +4,7 @@ import { useCartState } from "~/lib/useCart";
 
 const menu = [
   { title: "Userlocation", href: "/userlocation" },
+  { title: "Google Map", href: "/googlemapapi" },
   // { title: "Catégorie 1", href: "/" },
   // { title: "À propos", href: "/" },
 ];
@@ -85,7 +86,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center space-x-4">
           <span className="text-2xl text-secondary-600 ">
-            ${cartTotal.toFixed(2)}
+            ₹{cartTotal.toFixed(2)}
           </span>
           <div className="relative">
             <svg

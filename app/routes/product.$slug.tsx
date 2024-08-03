@@ -91,7 +91,7 @@ const productSlug = () => {
               {product.name}
             </h1>
             <div className="mt-3">
-              <p className="text-3xl text-gray-900 ">$ {product.price}</p>
+              <p className="text-3xl text-gray-900 ">₹ {product.price}</p>
             </div>
             <div className="mt-6">
               <div
